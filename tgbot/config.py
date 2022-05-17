@@ -11,8 +11,15 @@ class TgBot:
 
 
 @dataclass
+class WeatherToken:
+    open_weather: str
+    yandex: str
+    geo_names: str
+
+@dataclass
 class Miscellaneous:
-    help_msg: str = None
+    help_msg: str
+    parse_mode: str
 
 
 @dataclass
@@ -34,6 +41,8 @@ def load_config(env_path: str = None, ini_path: str = None):
             admin_ids=list(map(int, env_reader.list('ADMINS'))),
         ),
         misc=Miscellaneous(
-            help_msg=ini_reader.get('HELP', 'message'),
+            help_msg=ini_reader.get('MESSAGE', 'help'),
+            parse_mode=ini_reader.get('BOT', 'parse_mode'),
+
         ),
     )
