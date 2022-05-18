@@ -4,10 +4,10 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from aiogram.dispatcher.fsm.storage.memory import MemoryStorage
 
-from tgbot.logger import logger
 from tgbot.config import load_config
-
 from tgbot.handlers import basic_router
+from tgbot.handlers import weather_router
+from tgbot.logger import logger
 
 
 async def main():
@@ -26,6 +26,7 @@ async def main():
 
     for router in [
         basic_router,
+        weather_router
     ]:
         dp.include_router(router)
 

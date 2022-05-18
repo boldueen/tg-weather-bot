@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from dataclasses import dataclass
 from configparser import ConfigParser
+from dataclasses import dataclass
+
 from environs import Env
 
 
@@ -11,10 +12,11 @@ class TgBot:
 
 
 @dataclass
-class WeatherToken:
+class Weather:
     open_weather: str
     yandex: str
     geo_names: str
+
 
 @dataclass
 class Miscellaneous:
@@ -26,6 +28,7 @@ class Miscellaneous:
 class Config:
     tg_bot: TgBot
     misc: Miscellaneous
+    weather: Weather
 
 
 def load_config(env_path: str = None, ini_path: str = None):
@@ -43,6 +46,10 @@ def load_config(env_path: str = None, ini_path: str = None):
         misc=Miscellaneous(
             help_msg=ini_reader.get('MESSAGE', 'help'),
             parse_mode=ini_reader.get('BOT', 'parse_mode'),
-
         ),
+        weather=Weather(
+            open_weather=env_reader.str('OPEN_WEATHER_TOKEN'),
+            yandex=env_reader.str('YANDEX_TOKEN'),
+            geo_names=env_reader.str('GEONAMES_TOKEN'),
+        )
     )
