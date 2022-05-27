@@ -1,2 +1,2 @@
 # Hey there!
-weather-bot nikonov ivan bsbo-07-20
+weather-bot by nikonov ivan bsbo-07-20
